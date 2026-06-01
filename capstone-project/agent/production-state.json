@@ -1,0 +1,64 @@
+{
+  "session_id": "capstone_1780315959993",
+  "batches": [
+    {
+      "id": 1,
+      "name": "CB-Standard-001",
+      "quality": 8.5,
+      "timestamp": "2026-06-01T12:12:55.090Z"
+    },
+    {
+      "id": 2,
+      "name": "CB-Light-001",
+      "quality": 8.2,
+      "timestamp": "2026-06-01T12:12:55.093Z"
+    },
+    {
+      "id": 3,
+      "name": "CB-Dark-001",
+      "quality": 8.9,
+      "timestamp": "2026-06-01T12:12:55.093Z"
+    },
+    {
+      "id": 4,
+      "name": "CB-Standard-001",
+      "quality": 8.5,
+      "timestamp": "2026-06-01T12:14:03.081Z"
+    },
+    {
+      "id": 5,
+      "name": "CB-Light-001",
+      "quality": 8.2,
+      "timestamp": "2026-06-01T12:14:03.086Z"
+    },
+    {
+      "id": 6,
+      "name": "CB-Dark-001",
+      "quality": 8.9,
+      "timestamp": "2026-06-01T12:14:03.086Z"
+    },
+    {
+      "id": 7,
+      "name": "CB-007-STD",
+      "quality": 8.5,
+      "timestamp": "2026-06-01T12:15:21.828Z"
+    },
+    {
+      "id": 8,
+      "name": "CB-008-LGT",
+      "quality": 8.2,
+      "timestamp": "2026-06-01T12:15:21.832Z"
+    },
+    {
+      "id": 9,
+      "name": "CB-009-DRK",
+      "quality": 8.9,
+      "timestamp": "2026-06-01T12:15:21.833Z"
+    }
+  ],
+  "statistics": {
+    "total": 9,
+    "avg_quality": "8.53",
+    "success_rate": "100.0"
+  }
+}
