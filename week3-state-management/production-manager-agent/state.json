@@ -1,0 +1,15 @@
+{
+  "session_id": "prod_manager_001",
+  "batches": [],
+  "quality_history": [],
+  "settings": {
+    "target_quality": 8.5,
+    "min_batch_size": 50,
+    "max_batch_size": 200
+  },
+  "statistics": {
+    "total_batches": 0,
+    "average_quality": 0,
+    "successful_batches": 0
+  }
+}
