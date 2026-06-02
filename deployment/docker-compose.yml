@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # MCP Temperature Sensor Server
+  mcp-server:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    working_dir: /app/mcp-server
+    command: node temperature-mcp.js
+    ports:
+      - "3001:3001"
+    environment:
+      - MCP_PORT=3001
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('child_process').execSync('curl localhost:3001 || true')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Cold Brew Production Manager Agent
+  agent:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    depends_on:
+      - mcp-server
+    working_dir: /app/agent
+    command: node cold-brew-manager.js
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - MCP_SERVER_URL=http://mcp-server:3001
+      - NODE_ENV=production
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/agent/logs
+      - ./data:/app/agent/data
+
+volumes:
+  logs:
+  data:

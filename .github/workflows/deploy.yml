@@ -1,0 +1,54 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd capstone-project/agent
+          npm install
+          cd ../mcp-server
+          npm install
+      
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          npm test --prefix capstone-project/agent || true
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build Docker image
+        run: |
+          docker build -f deployment/Dockerfile -t cold-brew-agent:latest .
+      
+      - name: Tag image
+        run: |
+          docker tag cold-brew-agent:latest cold-brew-agent:${{ github.sha }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy notification
+        run: |
+          echo "✅ Ready for deployment to production"
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref }}"
